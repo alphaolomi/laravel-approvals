@@ -2,7 +2,7 @@
 
 namespace Alphaolomi\LaravelApprovals\Database\Factories;
 
-use Alphaolomi\LaravelApprovals\Approval;
+use Alphaolomi\LaravelApprovals\Models\Approval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
