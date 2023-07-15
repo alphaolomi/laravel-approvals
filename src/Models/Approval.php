@@ -64,6 +64,7 @@ class Approval extends Model
     public function approvedBy(): BelongsTo
     {
         $userModel = config('approvals.user_model');
+
         return $this->belongsTo($userModel, 'approved_by');
     }
 
