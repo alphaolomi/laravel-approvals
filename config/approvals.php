@@ -8,6 +8,9 @@ return [
     'table_names' => [
         'approvals' => 'approvals',
     ],
+
+    'user_model' => config('auth.providers.users.model', 'App\Models\User'),
+
     'approval_types' => [
         'project_submission',
         'project_approval',
