@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('approvals', function (Blueprint $table) {
+            $table->id();
+
+            // Approval ID
+            $table->string('approval_id')->unique();
+
+            // Approvable
+            $table->morphs('approvable');
+
+            // The approval type
+            $table->string('approval_type');
+
+            // Who is posting the approval
+            $table->unsignedBigInteger('approved_by');
+            $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');
+
+            // Previous and next approver role
+            $table->string('prev_approver_role')->nullable();
+            $table->string('next_approver_role')->nullable();
+
+            // Previous approval
+            $table->unsignedBigInteger('prev_approval_id')->nullable();
+            $table->foreign('prev_approval_id')->references('id')->on('approvals')->onDelete('cascade');
+
+            // comment
+            $table->text('comment')->nullable();
+
+            // Add any other approval fields
+
+            $table->timestamps();
+        });
+    }
+};
