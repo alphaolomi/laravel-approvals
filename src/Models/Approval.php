@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 /**
  * Class Approval
  *
- * @package Alphaolomi\LaravelApprovals\Models
  *
  * @property string $approval_id
  * @property string $approvable_type
@@ -35,10 +34,10 @@ class Approval extends Model
 
     /**
      * The table associated with the model.
+     *
      * @var string
      */
     protected $table = 'approvals';
-
 
     protected $guarded = [];
 
@@ -53,8 +52,6 @@ class Approval extends Model
 
     /**
      * Get the owning approvable model.
-     *
-     * @return MorphTo
      */
     public function approvable(): MorphTo
     {
@@ -63,18 +60,14 @@ class Approval extends Model
 
     /**
      * Get the user that approved the model.
-     *
-     * @return BelongsTo
      */
-    public function approvedBy() : BelongsTo
+    public function approvedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approved_by');
     }
 
     /**
      * Get the previous approval.
-     *
-     * @return BelongsTo
      */
     public function prevApproval(): BelongsTo
     {
@@ -83,8 +76,6 @@ class Approval extends Model
 
     /**
      * Get the subsequent approvals.
-     *
-     * @return HasMany
      */
     public function subSequentApprovals(): HasMany
     {

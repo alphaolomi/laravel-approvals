@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 /**
  * Trait HasApprovals
  *
- * @package Alphaolomi\LaravelApprovals
  *
  * @property MorphMany $approvals
+ *
  * @method MorphMany approvals()
  * @method approve(string $type, null|User|int $user = null, string|null $comment = null)
  * @method hasApprovalFrom(User|int $user)
@@ -19,18 +19,15 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 trait HasApprovals
 {
-    /**
-     * @return MorphMany
-     */
     public function approvals(): MorphMany
     {
         return $this->morphMany(Approval::class, 'approvable')->latest();
     }
 
     /**
-     * @param string $type
-     * @param null|User|int $user
-     * @param string|null $comment
+     * @param  string  $type
+     * @param  null|User|int  $user
+     * @param  string|null  $comment
      * @return Approval
      */
     public function approve($type, $user = null, $comment = null)
@@ -42,7 +39,7 @@ trait HasApprovals
         $workflowStates = static::getApprovalWorkflowStates();
 
         // check if type is defined
-        if (!isset($workflowStates[$type])) {
+        if (! isset($workflowStates[$type])) {
             throw new \InvalidArgumentException("Approval state {$type} is not defined");
         }
 
@@ -64,7 +61,7 @@ trait HasApprovals
             }
 
             // check if next state is valid
-            if (!in_array($type, $workflowStates[$prevApproval->approval_type]['next_possible_state'])) {
+            if (! in_array($type, $workflowStates[$prevApproval->approval_type]['next_possible_state'])) {
                 // Cannot approve this state
                 throw new \InvalidArgumentException("Approval state {$type} is not valid");
             }
@@ -84,9 +81,8 @@ trait HasApprovals
     }
 
     /**
-     * @param User|int $user
-     * @param string|null $type
-     * @return bool
+     * @param  User|int  $user
+     * @param  string|null  $type
      */
     public function hasApprovalFrom($user, $type = null): bool
     {
@@ -123,10 +119,8 @@ trait HasApprovals
      * 'next_approver_role' => 'manager',
      * 'next_possible_state' => ['rejected'],
      * ],
-     *
-     * @return array
      */
-    public abstract static function getApprovalTypes(): array;
+    abstract public static function getApprovalTypes(): array;
 
-    public abstract static function getApprovalWorkflowStates(): array;
+    abstract public static function getApprovalWorkflowStates(): array;
 }

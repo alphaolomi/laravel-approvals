@@ -8,6 +8,7 @@ use Orchestra\Testbench\Factories\UserFactory;
 
 /**
  * @property mixed id
+ *
  * @mixins \Alphaolomi\LaravelApprovals\HasApprovals
  */
 class Project extends Model
@@ -89,7 +90,6 @@ it('can approve a project', function () {
     expect($project->approvals()->first()->comment)->toBe(null);
     expect($project->approvals()->first()->approved_by)->toBe($user->id);
 
-
     // Create another user
     $user2 = UserFactory::new()->create();
     $project->approve('project_approval', $user2);
@@ -99,7 +99,5 @@ it('can approve a project', function () {
     // expect($project->approvals()->first()->created_at)->toBeInstanceOf(Carbon\Carbon::class);
     // expect($project->approvals()->first()->comment)->toBe(null);
     // expect($project->approvals()->first()->approved_by)->toBe($user2->id);
-
-
 
 });

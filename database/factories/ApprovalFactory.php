@@ -5,7 +5,6 @@ namespace Alphaolomi\LaravelApprovals\Database\Factories;
 use Alphaolomi\LaravelApprovals\Approval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 class ApprovalFactory extends Factory
 {
     protected $model = Approval::class;
@@ -26,4 +25,3 @@ class ApprovalFactory extends Factory
         ];
     }
 }
-
